@@ -2,7 +2,10 @@ import Taro from '@tarojs/taro'
 import author from './author'
 
 const TIME_OUT = 30000;
-const HOST = 'http://qy.cqsudu.com:10200';
+let HOST = '';
+if (process.env.TARO_ENV !== 'h5'){
+  HOST = 'http://qy.cqsudu.com:10200';
+}
 
 
 export async function fetchToken(params) {

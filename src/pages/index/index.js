@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Button, Text, Image, Swiper, SwiperItem } from '@tarojs/components'
+import { View, Button, Text, Image, Swiper, SwiperItem, AtTabBar } from '@tarojs/components'
 import { AtButton, AtTabs, AtTabsPane, AtToast, AtIcon } from 'taro-ui'
 import pintuan from '../../asset/img/pintuan.png'
 import xunjia from '../../asset/img/xunjia.png'
@@ -8,6 +8,8 @@ import daigou from '../../asset/img/daigou.png'
 import headerIcon from '../../asset/img/icon.png'
 import { connect } from '@tarojs/redux'
 import HomeNav from '../../components/homeNav/homeNav'
+import TabNav from '../../components/tabNav/tabNav'
+
 import { add, minus, asyncAdd } from '../../actions/counter'
 import { getHomeData} from "../../api/api";
 import './index.scss'
@@ -36,7 +38,9 @@ class Index extends Component {
     navigationBarTextStyle:'white',
     navigationBarBackgroundColor:'#B71C1C',
     backgroundColor:'#B71C1C',
-    enablePullDownRefresh: true
+    enablePullDownRefresh: true,
+
+
   };
 
   constructor (props) {
@@ -47,6 +51,7 @@ class Index extends Component {
       decorationCurrent: 0,
       infoCurrent: 0,
       newsCurrent: 0,
+      logoCurrent: 0,
     }
   }
 
@@ -98,6 +103,11 @@ class Index extends Component {
       newsCurrent: value
     })
   }
+  handleLogoTabClick(value) {
+    this.setState({
+      logoCurrent: value
+    })
+  }
 
 
 
@@ -139,13 +149,18 @@ class Index extends Component {
             {item.name}
           </View>
           <View className='project_info_sub_title'>
-            {item.type}<Text style='padding:0 10px'>|</Text>{item.phase}<Text className='project_accurate_info'>精准情报</Text>
+            {item.type}<Text style='padding:0 10px'>|</Text>{item.phase} {item.intelligences ? <Text className='project_accurate_info'>精准情报</Text> : null}
           </View>
         </View>
         <View className='project_extra_container'>
-          <View className='project_user_tag'>
-            用户
-          </View>
+          {item.source === 0
+          ? <View className='project_user_tag'>
+              用户
+            </View>
+          : null
+
+          }
+
         </View>
       </View>
     )
@@ -290,6 +305,7 @@ class Index extends Component {
     const decorationTabList = [{ title: '家装商家' }, { title: '公装商家' }, { title: '项目信息' }];
     const InfoTabList = [{ title: '询价信息' }, { title: '项目合作信息' }];
     const newsTabList = [{ title: '平台动态' }, { title: '行业资讯' }];
+    const logoTabList = [{ title: '供应商' }, { title: '设计施工单位' }, { title: '开发商/企事业单位' }];
 
     //菜单栏每8个为一个滑块
     let navSwipers = [];
@@ -323,7 +339,7 @@ class Index extends Component {
                       {
                         swiperItem.map(item =>{
                           return(
-                            <View class='nav_item' >
+                            <View className='nav_item' >
                               <Image
                                 mode='widthFix'
                                 className='nav_icon'
@@ -382,7 +398,7 @@ class Index extends Component {
                         : null
                     }
 
-                    <View class='more_container'>
+                    <View className='more_container'>
                       <View className='more_container_btn'>
                         更多
                       </View>
@@ -398,7 +414,7 @@ class Index extends Component {
                         })
                         : null
                     }
-                    <View class='more_container'>
+                    <View className='more_container'>
                       <View className='more_container_btn'>
                         更多
                       </View>
@@ -415,7 +431,7 @@ class Index extends Component {
                         })
                         : null
                     }
-                    <View class='more_container'>
+                    <View className='more_container'>
                       <View className='more_container_btn'>
                         更多
                       </View>
@@ -444,7 +460,7 @@ class Index extends Component {
                           })
                           : null
                       }
-                    <View class='more_container'>
+                    <View className='more_container'>
                       <View className='more_container_btn'>
                         更多
                       </View>
@@ -462,7 +478,7 @@ class Index extends Component {
                         : null
                     }
 
-                    <View class='more_container'>
+                    <View className='more_container'>
                       <View className='more_container_btn'>
                         更多
                       </View>
@@ -527,7 +543,7 @@ class Index extends Component {
                         })
                         : null
                     }
-                    <View class='more_container'>
+                    <View className='more_container'>
                       <View className='more_container_btn'>
                         更多
                       </View>
@@ -545,7 +561,7 @@ class Index extends Component {
                         : null
                     }
 
-                    <View class='more_container'>
+                    <View className='more_container'>
                       <View className='more_container_btn'>
                         更多
                       </View>
@@ -560,6 +576,35 @@ class Index extends Component {
 
 
         </View>
+
+        <View className='mb-5 at-row at-row--wrap logo_tab_container'>
+          <View className='at-col at-col-12' style='background:#fff' >
+            <AtTabs
+              swipeable
+              scroll
+              current={this.state.logoCurrent}
+              tabList={logoTabList}
+              onClick={this.handleLogoTabClick.bind(this)}
+            >
+              <AtTabsPane current={this.state.newsCurrent} index={0}>
+                <View className='news_container px-4 '>
+                </View>
+              </AtTabsPane>
+              <AtTabsPane current={this.state.newsCurrent} index={1}>
+                <View className='news_container px-4 '>
+                </View>
+              </AtTabsPane>
+              <AtTabsPane current={this.state.newsCurrent} index={2}>
+                <View className='news_container px-4 '>
+                </View>
+              </AtTabsPane>
+
+
+            </AtTabs>
+          </View>
+        </View>
+
+        <TabNav />
 
       </View>
     )

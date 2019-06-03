@@ -35,23 +35,24 @@ class HomeNav extends Component {
             11℃
           </Text>
           <View className='location'>
-            <AtIcon value='map-pin' size='30' color='#FFF'></AtIcon>
+            <AtIcon value='map-pin' size='20' color='#FFF'></AtIcon>
             <Text className='location-name'>
               重庆
             </Text>
           </View>
           <View className='activity'>
-            <AtIcon value='bell' size='30' color='#FFF'></AtIcon>
+            <AtIcon value='bell' size='20' color='#FFF'></AtIcon>
 
-            <Text style=''>
+            <Text className='activity_text'>
               活动
             </Text>
           </View>
 
         </View>
         <View className='search'>
-          <Image src={search} style='width: 20px; height: 18px; position: absolute; right: 20px;top: 8px;z-index:999' onClick={this.onSearch.bind(this)} />
-          <Input style='background:#fff;border-radius:4px;padding:4px 30px 4px 10px;width:100%'
+          <Image src={search} className='search_icon' onClick={this.onSearch.bind(this)} />
+          <Input style=''
+            className='search_input'
             placeholder-style='font-size:14px'
             type='text'
             placeholder='请输入关键词'

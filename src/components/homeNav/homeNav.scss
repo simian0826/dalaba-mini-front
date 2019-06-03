@@ -19,10 +19,11 @@
     z-index: 1;
     display: flex;
     justify-content:space-between;
+
     width: 100%;
     padding: 0 20px;
     margin-top: 160px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     flex-wrap: wrap;
     .temperature{
       font-size: 24px;
@@ -42,6 +43,7 @@
 
       .location-name{
         margin-left: 10px;
+        font-size: 28px;
       }
     }
 
@@ -50,6 +52,9 @@
       display: flex;
       align-items: center;
       align-content: center;
+      .activity_text{
+        font-size: 28px;
+      }
     }
   }
   .search{
@@ -57,6 +62,23 @@
     display: flex;
     width: 100%;
     padding: 0 20px;
+    .search_input{
+      background:#fff;
+      border-radius:4px;
+      padding: 10px 10px 15px 30px;
+      width:100%;
+      font-size: 18px;
+    }
+    .search_icon{
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      right: 30px;
+      top: 12px;
+      z-index:999
+    }
+
   }
+
 }
 

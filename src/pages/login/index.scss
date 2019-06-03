@@ -1,0 +1,44 @@
+.app_container{
+  background: #fff;
+}
+
+.header_container{
+  box-sizing: border-box;
+  display: inline-block;
+  width: 180px;
+  height:180px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+  margin-top: 160px;
+}
+
+.form_container{
+  box-sizing: border-box;
+  margin-top: 120px;
+}
+.form_item_container{
+  position: relative;
+
+}
+
+.icon_container{
+  position:absolute;
+  bottom: 15px;
+  left: 10px;
+}
+
+.input_item{
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+  padding-bottom: 20px;
+  padding-left: 100px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  color: #4c4c4c;
+  font-size: 26px;
+}
+.input_placeholder{
+  font-size: 26px;
+  color:red
+}

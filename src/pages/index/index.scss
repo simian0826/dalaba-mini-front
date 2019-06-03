@@ -355,10 +355,15 @@
   color:#666
 }
 
-.decoration_container  .at-tabs__item-underline, .info_tab_container .at-tabs__item-underline{
+.decoration_container  .at-tabs__item-underline,
+.info_tab_container .at-tabs__item-underline,
+.news_tab_container .at-tabs__item-underline,
+.logo_tab_container .at-tabs__item-underline
+{
   background-color: #da251d !important;
 }
-.decoration_container .at-tabs__item--active, .info_tab_container .at-tabs__item--active{
+ .at-tabs__item--active
+{
   color: #da251d !important;
 }
 

@@ -20,14 +20,40 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/login/index',
+
+      'pages/mine/index',
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTextStyle: 'black',
       navigationStyle: 'custom'
-    }
+    },
+    // tabBar: {
+    //   color: "#ccc",
+    //   selectedColor: "#da251d",
+    //   backgroundColor: "#FBFBFB",
+    //   borderStyle: "white",
+    //   list: [
+    //     {
+    //       pagePath: "pages/index/index",
+    //       text: "首页",
+    //       iconPath: "asset/img/home.png",
+    //       selectedIconPath: "asset/img/home0.png"
+    //     },
+    //     {
+    //       pagePath: "pages/mine/index",
+    //       text: "我的",
+    //       iconPath: "",
+    //       selectedIconPath: ""
+    //     },
+    //   ],
+    //   // custom: true,
+    //
+    // },
+
   };
 
   componentDidMount () {}
