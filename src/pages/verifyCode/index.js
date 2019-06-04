@@ -22,7 +22,9 @@ class Index extends Component {
     super(props)
     this.state = {
       loading:false,
-      phone: '1321230203'
+      phone: '1321230203',
+      verifyCode:'',
+      isFocus:false
     }
   }
 
@@ -40,7 +42,16 @@ class Index extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
-
+  focusVerify(){
+    this.setState({
+      isFocus: true
+    })
+  }
+  verifyInput(event){
+    this.setState({
+      verifyCode: event.detail.value
+    })
+  }
   render () {
 
     return (
@@ -53,17 +64,23 @@ class Index extends Component {
         <View className='verify_container '>
           <Text className='phone_number pl-3'>验证码</Text>
           <View className='verify_input_container'>
-            <Input password value={this.state.form.account} onChange={this.formItemInput.bind(this, 'account')}
-              className='input_item'
+            {
+
+            }
+            <Input password value={this.state.verifyCode.length>=1?this.state.verifyCode[0]:''} onClick={this.focusVerify.bind(this)}
+              disabled className='input_item'
             />
-            <Input password value={this.state.form.account} onChange={this.formItemInput.bind(this, 'account')}
-              className='input_item'
+            <Input password value={this.state.verifyCode.length>=2?this.state.verifyCode[1]:''} onClick={this.focusVerify.bind(this)}
+              disabled className='input_item'
             />
-            <Input password value={this.state.form.account} onChange={this.formItemInput.bind(this, 'account')}
-              className='input_item'
+            <Input password value={this.state.verifyCode.length>=3?this.state.verifyCode[2]:''} onClick={this.focusVerify.bind(this)}
+              disabled className='input_item'
             />
-            <Input password value={this.state.form.account} onChange={this.formItemInput.bind(this, 'account')}
-              className='input_item'
+            <Input password value={this.state.verifyCode.length>=4?this.state.verifyCode[3]:''} onClick={this.focusVerify.bind(this)}
+              disabled className='input_item'
+            />
+            <Input password value={this.state.form.account} onInput={this.verifyInput.bind(this)}
+              className='real_input' focus={this.state.isFocus}
             />
           </View>
         </View>
