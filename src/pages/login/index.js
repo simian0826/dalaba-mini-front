@@ -1,12 +1,12 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Button, Text, Image, Input, Form  } from '@tarojs/components'
+import { View, Button, Text, Image, Input, Form, Checkbox, CheckboxGroup  } from '@tarojs/components'
 import { AtButton, AtTabs, AtTabsPane, AtToast, AtIcon } from 'taro-ui'
-
+import { Base64 } from 'js-base64';
+import {fetchToken} from '../../api/api'
 import headIcon from '../../asset/img/headIcon.jpeg'
-
 import './index.scss'
 
-
+const CLIENT_ID = 'test_client_id';
 class Index extends Component {
 
   config = {
@@ -22,8 +22,14 @@ class Index extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading:false,
+      loading: false,
+      form:{
+        account:'',
+        password:'',
+      },
 
+      showPassword: true,
+      isRemember: false
 
     }
   }
@@ -43,33 +49,90 @@ class Index extends Component {
 
   componentDidHide () { }
 
+  showPwd(){
+    this.setState({
+      showPassword: !this.state.showPassword
+    })
+
+  }
+  changeRemember(){
+    this.setState({
+      isRemember: !this.state.isRemember
+    })
+  }
+  formItemInput(index, event){
+    let form = this.state.form;
+    form[index] = event.detail.value;
+    this.setState({
+      form: form
+    });
+
+  }
+  login(){
+    console.log(this.state);
+
+    let tempParams = {
+      grant_type: 'mobile',
+      username: this.state.form.account,
+      // password: window.atob(vm.form.password),
+      password:Base64.encode(this.state.form.password),
+      client_id: CLIENT_ID
+    }
+    fetchToken(tempParams).then(res =>{
+      console.log(res);
+    })
+  }
+
   render () {
 
     return (
 
-      <View className='app_container pa-5' style='text-align: center'>
+      <View className='app_container pa-5' >
         <View className='header_container pa-3' >
           <Image src={headIcon} style='width: 100%; height: 100%; border-radius: 50%;' mode='widthFix' />
         </View>
 
         <View className='form_container px-5'>
-          <Form onSubmit={this.formSubmit} onReset={this.formReset} >
+          <Form onSubmit={this.login.bind(this)} onReset={this.formReset} >
             <View className='form_item_container mb-5'>
               <View className='icon_container' >
                 <AtIcon value='iphone' size='24' color='#ccc' ></AtIcon>
               </View>
-              <Input  placeholder='请输入手机号' className='input_item' placeholderClass='input_placeholder' />
+              <Input  placeholder='请输入账号' value={this.state.form.account} onChange={this.formItemInput.bind(this, 'account')}
+                className='input_item' placeholderClass='input_placeholder'
+              />
             </View>
             <View className='form_item_container mt-5'>
-              <View className='icon_container' style=''>
+              <View className='icon_container'>
                 <AtIcon value='lock' size='24' color='#ccc' ></AtIcon>
               </View>
-              <Input password placeholder='请输入密码' className='input_item' placeholderClass='input_placeholder' />
-              <View className='show_password' style=''>
+              <Input password={this.state.showPassword} value={this.state.form.password} onChange={this.formItemInput.bind(this, 'password')}
+                placeholder='请输入密码' className='input_item' placeholderClass='input_placeholder'
+              />
+              <View className='show_password'  >
+                <AtIcon value='eye' size='24' color='#ccc' onClick={this.showPwd.bind(this)} />
               </View>
+            </View>
+            <View className='form_item_container mt-4 pl-4'>
+              <CheckboxGroup bindchange={this.changeRemember.bind(this)}>
+                <Checkbox value={this.state.isRemember} onChange={this.changeRemember.bind(this)} className='check_box'>15天内自动登陆</Checkbox>
+              </CheckboxGroup>
+
+            </View>
+            <View className='form_item_container mt-5 '>
+              <AtButton circle type='primary'  className='login_button pa-1' formType='submit'>登 录</AtButton>
+            </View>
+            <View className='extra_container mt-5 '>
+              <Text>账号注册</Text>
+              <Text>|</Text>
+              <Text>忘记密码</Text>
             </View>
           </Form>
 
+        </View>
+
+        <View className='footer mb-5'>
+          重庆庆渝科技有限公司
         </View>
       </View>
     )

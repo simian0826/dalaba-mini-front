@@ -282,7 +282,7 @@
     min-height: 160px;
     display: flex;
     box-sizing: border-box;
-    border-bottom: 1px dashed #ddd;
+    border-bottom: 2px dashed #ddd;
 
     .news_item_img_container{
       width: 30%;
@@ -315,7 +315,7 @@
   .news_item{
     width: 100%;
     box-sizing: border-box;
-    border-bottom: 1px dashed #ddd;
+    border-bottom: 2px dashed #ddd;
     display: flex;
     align-items: center;
     .dot{
@@ -345,7 +345,7 @@
   align-items: center;
 }
 .more_container_btn{
-  border:1px solid #ccc;
+  border:2px solid #ccc;
   border-radius:4px;
   width:25%;
   padding: 6px 12px;

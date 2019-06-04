@@ -20,9 +20,9 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/index/index',
+      'pages/verifyCode/index',
       'pages/login/index',
-
+      'pages/index/index',
       'pages/mine/index',
     ],
     window: {

@@ -301,7 +301,7 @@ class Index extends Component {
 
   render () {
     let {home} = this.state;
-    console.log(home);
+    //console.log(home);
     const decorationTabList = [{ title: '家装商家' }, { title: '公装商家' }, { title: '项目信息' }];
     const InfoTabList = [{ title: '询价信息' }, { title: '项目合作信息' }];
     const newsTabList = [{ title: '平台动态' }, { title: '行业资讯' }];
@@ -346,7 +346,7 @@ class Index extends Component {
                                 src={item.iconWapUrl}
                               >
                               </Image>
-                              <Text class='nav_title'>{item.name}</Text>
+                              <Text className='nav_title'>{item.name}</Text>
                             </View>
                           )
                         })
