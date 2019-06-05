@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-import {fetchToken, refreshToken} from './api'
+import {fetchToken, refreshToken} from '../api/api'
 
 const CLIENT_ID = 'test_client_id';
 

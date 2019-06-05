@@ -2,8 +2,8 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Text, Input, AtTabBar } from '@tarojs/components'
 import { AtButton, AtTabs, AtTabsPane, AtToast, AtIcon } from 'taro-ui'
 
-import { getHomeData} from "../../api/api";
 import './index.scss'
+import {sendVerifyCode} from "../../api/api";
 
 
 class Index extends Component {
@@ -21,7 +21,7 @@ class Index extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading:false,
+      loading: false,
       phone: '1321230203',
       verifyCode:'',
       isFocus:false
@@ -34,6 +34,13 @@ class Index extends Component {
   }
 
   componentWillMount(){
+    console.log(this.$router.params);
+    // let phone = this.state.phone.replace(/\\d{3})\\d{4}(\\d{4})/, "$1****$2");
+
+    // console.log(phone);
+    // this.setState({
+    //   phone
+    // })
   }
   componentWillUnmount () {
 
@@ -42,31 +49,42 @@ class Index extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
+
+  returnLogin(){
+    Taro.redirectTo({
+      url:'/pages/login/index'
+    })
+  }
+
   focusVerify(){
     this.setState({
       isFocus: true
     })
   }
   verifyInput(event){
+
     this.setState({
       verifyCode: event.detail.value
     })
+    if (event.detail.value.length === 4){
+      sendVerifyCode({mobile: event.detail.value}).then(res =>{
+        console.log(res);
+      })
+    }
   }
   render () {
-
     return (
-
       <View className='app_container'>
-        <View className='header_container pa-5'><AtIcon value='chevron-left' size='30' color='#666'></AtIcon></View>
+        <View className='header_container pa-5'><AtIcon value='chevron-left' size='30' color='#666' onClick={this.returnLogin.bind(this)}></AtIcon></View>
         <View className='title mb-5'>短信验证</View>
-        <View className='subtitle pt-3 mb-5'>尊敬的会员用户，为了保护您的账户安全，请输入验证码验证</View>
+        <View className='subtitle pt-3 mb-4'>尊敬的会员用户，为了保护您的账户安全，请输入验证码验证</View>
         <View className='phone_info pt-3'>验证码已经发送到你的手机号码 <Text className='phone_number pl-3'>{this.state.phone}</Text></View>
-        <View className='verify_container '>
+        <View className='verify_container'>
           <Text className='phone_number pl-3'>验证码</Text>
           <View className='verify_input_container'>
-            {
-
-            }
+            <Input value={this.state.verifyCode} maxLength={4} onInput={this.verifyInput.bind(this)} type='number'
+              className='real_input' focus={this.state.isFocus}
+            />
             <Input password value={this.state.verifyCode.length>=1?this.state.verifyCode[0]:''} onClick={this.focusVerify.bind(this)}
               disabled className='input_item'
             />
@@ -79,9 +97,10 @@ class Index extends Component {
             <Input password value={this.state.verifyCode.length>=4?this.state.verifyCode[3]:''} onClick={this.focusVerify.bind(this)}
               disabled className='input_item'
             />
-            <Input password value={this.state.form.account} onInput={this.verifyInput.bind(this)}
-              className='real_input' focus={this.state.isFocus}
-            />
+
+          </View>
+          <View className='supplement_container '>
+            没有收到验证码？<Text className='resend px-2'>重新发送</Text>
           </View>
         </View>
       </View>

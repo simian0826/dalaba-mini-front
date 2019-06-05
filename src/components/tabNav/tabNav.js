@@ -2,11 +2,9 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Button, Text, Image  } from '@tarojs/components'
 import { AtIcon, AtTabBar } from 'taro-ui'
 import { connect } from '@tarojs/redux'
-import { add, minus, asyncAdd } from '../../actions/counter'
-
 import './tabNav.scss'
 import {changeCurrent} from "../../actions/tabNav";
-
+import { verifyRedirect } from '../../common/verifyPath'
 
 @connect(({ tabNav }) => ({
   tabNav
@@ -43,35 +41,33 @@ class TabNav extends Component {
   handleClick (value) {
 
     this.props.changeCurrent(value)
+    let path = ''
     switch (value) {
       case 0:
-      Taro.redirectTo({
-          url: `/pages/index/index`
-        })
+        path = '/pages/index/index'
+
         break;
       case 1:
-        Taro.redirectTo({
-          url: `/pages/index/index`
-        })
+        path = '/pages/index/index'
+
         break;
       case 2:
-        Taro.redirectTo({
-          url: `/pages/index/index`
-        })
+        path = '/pages/index/index'
+
         break;
       case 3:
-        Taro.redirectTo({
-          url: `/pages/index/index`
-        })
+        path = '/pages/index/index'
+
         break;
       case 4:
-        Taro.redirectTo({
-          url: `/pages/mine/index`
-        })
+        path = '/pages/mine/index'
+
         break;
       default:
           break
     }
+    verifyRedirect(path)
+
   }
 
   render () {

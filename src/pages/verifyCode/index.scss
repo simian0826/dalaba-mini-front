@@ -43,7 +43,7 @@ page{
 .verify_container{
   width: 100%;
   padding: 0 90px;
-  margin-top: 140px;
+  margin-top: 100px;
   box-sizing: border-box;
 }
 .verify_title{
@@ -54,6 +54,7 @@ page{
 .verify_input_container{
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   box-sizing: border-box;
   .input_item{
@@ -65,6 +66,19 @@ page{
   .real_input{
     width: 0;
     height: 0;
+  }
+}
+.supplement_container{
+  width: 100%;
+  text-align: center;
+  color: #444;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 100px;
+
+  .resend{
+    color: #00B0FF;
+
   }
 }
 

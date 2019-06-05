@@ -12,6 +12,7 @@ import TabNav from '../../components/tabNav/tabNav'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
 import { getHomeData} from "../../api/api";
+import {isVerifyPath} from  '../../common/verifyPath'
 import './index.scss'
 
 

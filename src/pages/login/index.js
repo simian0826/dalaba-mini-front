@@ -71,15 +71,46 @@ class Index extends Component {
   login(){
     console.log(this.state);
 
+    if (this.state.form.account === ''){
+      Taro.showToast({
+        title: '请输入账号',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    if (this.state.form.password === ''){
+      Taro.showToast({
+        title: '请输入密码',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
     let tempParams = {
-      grant_type: 'mobile',
+      grant_type: 'password-valid',
       username: this.state.form.account,
       // password: window.atob(vm.form.password),
       password:Base64.encode(this.state.form.password),
       client_id: CLIENT_ID
     }
     fetchToken(tempParams).then(res =>{
-      console.log(res);
+
+      if (res.data.code === 11013){
+        Taro.redirectTo({
+          url: `/pages/verifyCode/index?phone=${res.data.message}`
+        })
+      }
+      if (res.data.code === 13004){
+        Taro.showToast({
+          title: res.data.message,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    }).catch(e =>{
+
+
     })
   }
 
@@ -93,7 +124,7 @@ class Index extends Component {
         </View>
 
         <View className='form_container px-5'>
-          <Form onSubmit={this.login.bind(this)} onReset={this.formReset} >
+          <Form  onReset={this.formReset} >
             <View className='form_item_container mb-5'>
               <View className='icon_container' >
                 <AtIcon value='iphone' size='24' color='#ccc' ></AtIcon>
@@ -114,13 +145,13 @@ class Index extends Component {
               </View>
             </View>
             <View className='form_item_container mt-4 pl-4'>
-              <CheckboxGroup bindchange={this.changeRemember.bind(this)}>
-                <Checkbox value={this.state.isRemember} onChange={this.changeRemember.bind(this)} className='check_box'>15天内自动登陆</Checkbox>
+              <CheckboxGroup bindchange={this.changeRemember.bind(this)} className='check_box'>
+                <Checkbox value={this.state.isRemember} onChange={this.changeRemember.bind(this)}><Text className='check_box'>15天内自动登陆</Text></Checkbox>
               </CheckboxGroup>
 
             </View>
             <View className='form_item_container mt-5 '>
-              <AtButton circle type='primary'  className='login_button pa-1' formType='submit'>登 录</AtButton>
+              <AtButton circle type='primary'  className='login_button pa-1' formType='submit' onClick={this.login.bind(this)}>登 录</AtButton>
             </View>
             <View className='extra_container mt-5 '>
               <Text>账号注册</Text>

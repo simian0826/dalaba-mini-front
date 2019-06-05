@@ -31,6 +31,10 @@ page{
 }
 .form_item_container{
   position: relative;
+  input[type='checkbox']{
+    width: 26px;
+    height: 26px;
+  }
 }
 
 .icon_container{
@@ -63,6 +67,7 @@ page{
 .check_box{
   font-size: 24px;
   color: #ababab;
+
 }
 .check_box .wx-checkbox-input {
   width: 26px;
